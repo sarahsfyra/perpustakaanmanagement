@@ -1,0 +1,238 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head>     
+    <meta charset="UTF-8">     
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">     
+    <title>Pengembalian Buku</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>         
+        * {
+            margin: 0;     
+            padding: 0;     
+            box-sizing: border-box;     
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }  
+        
+        body {     
+            background-color: #dbdbc5;
+            display: flex;     
+            flex-direction: column;     
+            align-items: center;     
+            justify-content: center;     
+            min-height: 100vh; 
+            padding: 20px;
+        }  
+        
+        form {          
+            padding: 30px;     
+            border-radius: 12px;     
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);     
+            width: 100%;     
+            max-width: 420px;     
+            box-sizing: border-box;
+            background-color: #f5f5df; 
+        }  
+        
+        header {     
+            text-align: center;     
+            margin-bottom: 30px; 
+        }  
+        
+        header h1 {     
+            color: #4b4b31;     
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+        
+        header h1:after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 3px;
+            background: #b30000;
+            bottom: 0;
+            left: 20%;
+            border-radius: 10px;
+        }
+        
+        main {     
+            width: 100%;     
+            max-width: 420px;     
+            background-color: #f5f5df;
+            border-radius: 12px;     
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: fadeIn 0.5s ease-out;
+        } 
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Form group styling */ 
+        .form-group {     
+            margin-bottom: 20px;
+            position: relative;
+        }  
+        
+        /* Label styles */ 
+        label {     
+            display: block;     
+            font-size: 14px;     
+            font-weight: 600;     
+            margin-bottom: 8px;     
+            color: #4b4b31;
+            transition: all 0.3s ease;
+        }  
+        
+        /* Input and select styles */ 
+        input[type="text"], 
+        input[type="date"], 
+        select {     
+            width: 100%;     
+            padding: 12px 15px;     
+            margin: 0;     
+            border: 1px solid #c5c5a6;     
+            border-radius: 6px;     
+            box-sizing: border-box;     
+            font-size: 15px;
+            background-color: #ffffff;
+            color: #4b4b31;
+            transition: all 0.3s ease;
+        }  
+        
+        /* Add icons to form fields */
+        .form-group::before {
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 15px;
+            top: 38px;
+            color: #6d6d57;
+            font-size: 16px;
+            z-index: 1;
+        }
+        
+        .form-group:nth-child(1)::before {
+            content: "\f007"; /* User icon */
+        }
+        
+        .form-group:nth-child(2)::before {
+            content: "\f19d"; /* Graduation cap icon */
+        }
+        
+        .form-group:nth-child(3)::before {
+            content: "\f02d"; /* Book icon */
+        }
+        
+        .form-group:nth-child(4)::before {
+            content: "\f073"; /* Calendar icon */
+        }
+        
+        /* Input focus styling */ 
+        input:focus, 
+        select:focus {     
+            border-color: #b30000;     
+            outline: none;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(179, 0, 0, 0.1);
+        }  
+        
+        /* Button styles */ 
+        button {     
+            background-color: #ff0000;
+            color: #fff;     
+            padding: 14px 16px;     
+            border: none;     
+            border-radius: 6px;     
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;     
+            width: 100%;     
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(179, 0, 0, 0.2);
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        
+        button::before {
+            content: "\f0d1";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            margin-right: 8px;
+        }
+        
+        /* Button hover effect */ 
+        button:hover {     
+            background-color: #b30000;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(179, 0, 0, 0.3);
+        }
+        
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(179, 0, 0, 0.2);
+        }
+        
+        /* Input and select adjustments for icons */
+        input[type="text"], 
+        input[type="date"], 
+        select {
+            padding-left: 40px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            form, main {
+                max-width: 100%;
+            }
+            
+            header h1 {
+                font-size: 24px;
+            }
+        }
+    </style> 
+</head> 
+<body>     
+    <main>
+        <form action="pengembalian.php" method="post">
+            <header>         
+                <h1>PENGEMBALIAN BUKU</h1>     
+            </header>
+            <div class="form-group">             
+                <label for="nama">Nama:</label>             
+                <input type="text" id="nama" name="nama" required placeholder="Masukkan nama lengkap">         
+            </div>         
+            <div class="form-group">             
+                <label for="kelas">Kelas:</label>             
+                <select id="kelas" name="kelas" required>                 
+                    <option value="" disabled selected>Pilih kelas</option>                 
+                    <option value="X PPLG A">X PPLG A</option>                 
+                    <option value="X PPLG B">X PPLG B</option>                 
+                    <option value="XI PPLG A">XI PPLG A</option>                 
+                    <option value="XI PPLG B">XI PPLG B</option>                 
+                    <option value="XII PPLG A">XII PPLG A</option>                 
+                    <option value="XII PPLG B">XII PPLG B</option>             
+                </select>         
+            </div>         
+            <div class="form-group">             
+                <label for="kode_buku">Kode Buku:</label>             
+                <input type="text" id="kode_buku" name="kode_buku" required placeholder="Masukkan kode buku">         
+            </div>         
+            <div class="form-group">             
+                <label for="tanggal_kembali">Tanggal Pengembalian:</label>             
+                <input type="date" id="tanggal_kembali" name="tanggal_kembali" required>         
+            </div>         
+            <button type="submit">Kembalikan Buku</button>     
+        </form>
+    </main> 
+</body> 
+</html>

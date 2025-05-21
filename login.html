@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Perpustakaan Digital</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #dbdbc5 0%, #e8e8d0 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        /* Header Section */
+        .header-text {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header-text h1 {
+            color: #3a3a27;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .header-text h1:after {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 4px;
+            background: linear-gradient(to right, #d11a1a, #ff4d4d);
+            bottom: 0;
+            left: 15%;
+            border-radius: 2px;
+        }
+
+        .header-text p {
+            font-size: 16px;
+            color: #6d6d57;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* Divider */
+        .divider {
+            width: 90%;
+            max-width: 400px;
+            height: 3px;
+            background: linear-gradient(to right, #d11a1a, #ff4d4d);
+            margin: 20px 0 35px 0;
+            border: none;
+            border-radius: 2px;
+        }
+
+        /* Main Container */
+        main {
+            width: 90%;
+            max-width: 400px;
+            background: #f5f5df;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            animation: slideIn 0.6s ease-out;
+            backdrop-filter: blur(5px);
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Form Title */
+        .form-title {
+            text-align: center;
+            font-size: 24px;
+            color: #3a3a27;
+            margin-bottom: 30px;
+            position: relative;
+            font-weight: 600;
+        }
+
+        .form-title:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, #d11a1a, #ff4d4d);
+            bottom: -10px;
+            left: calc(50% - 30px);
+            border-radius: 2px;
+        }
+
+        /* Form Elements */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        label {
+            font-size: 15px;
+            font-weight: 600;
+            color: #3a3a27;
+            margin-bottom: 10px;
+            display: block;
+            letter-spacing: 0.3px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px 14px 45px;
+            border: 1px solid #c5c5a6;
+            border-radius: 8px;
+            font-size: 15px;
+            background-color: #ffffff;
+            color: #3a3a27;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        input:focus {
+            border-color: #d11a1a;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(209, 26, 26, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Icons for Input Fields */
+        .form-group::before {
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 16px;
+            top: 38px;
+            color: #6d6d57;
+            font-size: 18px;
+            z-index: 1;
+        }
+
+        .form-group:nth-child(1)::before {
+            content: "\f0e0"; /* Envelope icon for email */
+        }
+
+        .form-group:nth-child(2)::before {
+            content: "\f023"; /* Lock icon for password */
+        }
+
+        /* Login Button */
+        .btn-login {
+            background: linear-gradient(to right, #d11a1a, #ff4d4d);
+            color: #fff;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(209, 26, 26, 0.3);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-login::before {
+            content: "\f090"; /* Sign-in icon */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            margin-right: 8px;
+        }
+
+        .btn-login:hover {
+            background: linear-gradient(to right, #b30f0f, #e63939);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(209, 26, 26, 0.4);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(209, 26, 26, 0.2);
+        }
+
+        /* Register Link */
+        .register-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #6d6d57;
+        }
+
+        .register-link a {
+            color: #d11a1a;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .register-link a:hover {
+            color: #b30f0f;
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .header-text h1 {
+                font-size: 26px;
+            }
+
+            .header-text p {
+                font-size: 14px;
+            }
+
+            main {
+                width: 95%;
+                padding: 25px;
+            }
+
+            .form-title {
+                font-size: 20px;
+            }
+
+            input {
+                padding: 12px 14px 12px 40px;
+                font-size: 14px;
+            }
+
+            .form-group::before {
+                top: 36px;
+                font-size: 16px;
+            }
+
+            .btn-login {
+                padding: 12px 16px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-text">
+        <h1>PERPUSTAKAAN DIGITAL</h1>
+        <p>SMKN 1 KOTA BEKASI</p>
+    </div>
+    
+    
+    <main>
+        <h2 class="form-title">Masuk ke Akun</h2>
+        <form action="login.php" method="post">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Masukkan email Anda" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Masukkan password Anda" required>
+            </div>
+            <button type="submit" class="btn-login">MASUK</button>
+        </form>
+        <p class="register-link">
+            Belum memiliki akun? <a href="register.html">Daftar di sini</a>
+        </p>
+    </main>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+        
+        if (error === 'wrong_password') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Password Salah',
+                text: 'Password yang Anda masukkan tidak cocok. Silakan coba lagi.'
+            });
+        } else if (error === 'email_not_found') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Email Tidak Ditemukan',
+                text: 'Email yang Anda masukkan belum terdaftar. Silakan daftar terlebih dahulu.'
+            });
+        }
+    </script>
+</body>
+</html>
